@@ -22,15 +22,24 @@ namespace course_project_OS
 
     internal class NoticeRepository
     {
-        static NoticeRepository Instance = new NoticeRepository();
+        static readonly NoticeRepository Instance = new NoticeRepository();
+        static readonly object locker = new object();
+
         List<Notice> notices = new List<Notice>();
 
-        public static void Add(Notice notice) => Instance.notices.Add(notice);
+        public static void Add(Notice notice)
+        {
+            lock (locker) { Instance.notices.Add(notice); }
+        }
 
         public static List<Notice> GetNotices()
         {
-            List<Notice> list = Instance.notices;
-            Instance.notices = new List<Notice>();
+            List<Notice> list;
+            lock (locker) 
+            {
+                list = Instance.notices;
+                Instance.notices = new List<Notice>();
+            }
             return list;
         }
 

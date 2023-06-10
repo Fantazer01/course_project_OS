@@ -15,6 +15,7 @@
             Thread senderCommand = new Thread(SenderCommand.Run);
             senderCommand.Start();
 
+            /*
             while (true)
             {
                 Console.WriteLine(introduction);
@@ -22,7 +23,7 @@
                 if (command == null || command == "exit")
                     break;
                 ProcessingCommand(command);
-            }
+            }*/
 
             SenderCommand.OffApp();
         }

@@ -15,7 +15,7 @@ namespace course_project_OS
             {
                 foreach (Notice notice in list)
                 {
-                    Console.WriteLine($"{notice.DateTime} Command code( {notice.CodeCommand}); Message: {notice.Message}");
+                    Console.WriteLine($"{notice.DateTime}|Command code({notice.CodeCommand})|Message: {notice.Message}");
                 }
             } else
             {
