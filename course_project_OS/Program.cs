@@ -11,6 +11,10 @@
         static void Main(string[] args)
         {
             Console.WriteLine(welcome);
+
+            Thread senderCommand = new Thread(SenderCommand.Run);
+            senderCommand.Start();
+
             while (true)
             {
                 Console.WriteLine(introduction);
@@ -19,6 +23,8 @@
                     break;
                 ProcessingCommand(command);
             }
+
+            SenderCommand.OffApp();
         }
 
         static void ProcessingCommand(string command)
@@ -30,6 +36,6 @@
             else
                 Console.WriteLine("Вы ввели некоректную команду, попробуйте заново.\n");
         }
-        
+
     }
 }
