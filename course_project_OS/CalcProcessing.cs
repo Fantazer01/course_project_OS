@@ -6,16 +6,6 @@ using System.Threading.Tasks;
 
 namespace course_project_OS
 {
-    class CommandParams
-    {
-        public double Number1 { get; set; }
-        public double Number2 { get; set; }
-        public string Operation { get; set; } = string.Empty;
-        public int Timer { get; set; } 
-        public CommandParams() { }
-
-    }
-
     internal class CalcProcessing
     {
         static readonly string introLine = "Для выполнения арифметической операции введите в указанном порядке:\n"
@@ -28,15 +18,15 @@ namespace course_project_OS
             if (line == null)
                 return;
 
-
-            CommandParams? commandParams;
-            if (!TryParseParams(line, out commandParams))
+            if (!TryParseParams(line, out CommandParams commandParams))
                 return;
 
-            Console.WriteLine("Happy end!");
+            long codeCommand = CommandRepository.Add(commandParams);
+            NoticeRepository.Add(new Notice(codeCommand, $"Command (code: {codeCommand}) add to query of calculate."));
+            Console.WriteLine($"Задаче присвоен код {codeCommand}, она поставлена в очередь на исполнение.");
         }
 
-        private static bool TryParseParams(string line, out CommandParams? commandParams)
+        private static bool TryParseParams(string line, out CommandParams commandParams)
         {
             commandParams = new CommandParams();
             string[] param = line.Split(' ');
