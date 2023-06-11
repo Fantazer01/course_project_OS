@@ -12,11 +12,11 @@ namespace Agent
         {
             while (true)
             {
-                string response = string.Empty;
+                string response;
                 try
                 {
                     response = await GetResponse();
-                } catch (Exception ex)
+                } catch
                 {
                     break;
                 }
