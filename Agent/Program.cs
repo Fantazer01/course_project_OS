@@ -8,31 +8,49 @@ namespace Agent
 {
     internal class Program
     {
-        static async Task Main(string[] args)
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Укажите количество агентов:");
+            if (!int.TryParse(Console.ReadLine(), out int n))
+                return;
+
+            for (int i = 0; i < n; ++i)
+            {
+                Thread thread = new Thread(AgentHandler);
+                thread.Name = i.ToString();
+                thread.Start();
+            }
+            
+        }
+
+        static void AgentHandler()
         {
             while (true)
             {
                 string response;
                 try
                 {
-                    response = await GetResponse();
-                } catch
+                    var task = GetResponse();
+                    response = task.Result;
+                }
+                catch
                 {
                     break;
                 }
-                    
-                if (response == null || response == string.Empty) 
+
+                if (response == null || response == string.Empty)
                 {
                     Thread.Sleep(1000);
-                } else
+                }
+                else
                 {
                     string resultOfCalculation = CommandProcessing(response);
-                    await SendResult(resultOfCalculation);
+                    var task = SendResult(resultOfCalculation);
+                    task.Wait();
                     Console.WriteLine(resultOfCalculation);
                 }
-                
+
             }
-            
         }
 
         static async Task<string> GetResponse()
@@ -99,13 +117,12 @@ namespace Agent
                 return false;
             }
 
-
             return true;
         }
 
         static string CalculateCommand(Command command)
         {
-            Thread.Sleep(command.CommandParams.Timer);
+            Thread.Sleep(1000);
             if (command.CommandParams.Operation == "+")
                 return $"result {command.CodeCommand} {command.CommandParams.Number1 + command.CommandParams.Number2}";
             else if (command.CommandParams.Operation == "-")
