@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaseLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,7 @@ namespace course_project_OS
                 return;
 
             long codeCommand = CommandRepository.Add(commandParams);
-            NoticeRepository.Add(new Notice(codeCommand, $"Command (code: {codeCommand}) add to query of calculate."));
+            NoticeRepository.Add(new Notice(codeCommand, $"Command add to query of calculate."));
             Console.WriteLine($"Задаче присвоен код {codeCommand}, она поставлена в очередь на исполнение.");
         }
 

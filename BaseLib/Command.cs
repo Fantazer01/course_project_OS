@@ -17,6 +17,8 @@ namespace BaseLib
         public long CodeCommand { get; set; }
         public CommandParams CommandParams { get; set; }
 
+        public Command() { CommandParams = new CommandParams(); }
+
         public Command(long code, CommandParams commandParams) { CodeCommand = code; CommandParams = commandParams; }
 
         public override string ToString()

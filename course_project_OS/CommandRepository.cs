@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaseLib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,24 +8,6 @@ using System.Threading.Tasks;
 
 namespace course_project_OS
 {
-    class CommandParams
-    {
-        public double Number1 { get; set; }
-        public double Number2 { get; set; }
-        public string Operation { get; set; } = string.Empty;
-        public int Timer { get; set; }
-        public CommandParams() { }
-
-    }
-
-    class Command
-    {
-        public long CodeCommand { get; set; }
-        public CommandParams CommandParams { get; set; }
-        
-        public Command(long code, CommandParams commandParams) { CodeCommand = code; CommandParams = commandParams; }
-    }
-
     internal class CommandRepository
     {
         static readonly CommandRepository Instance = new CommandRepository();
