@@ -2,7 +2,7 @@
 
 namespace BaseLib
 {
-    class CommandParams
+    public class CommandParams
     {
         public double Number1 { get; set; }
         public double Number2 { get; set; }
@@ -12,7 +12,7 @@ namespace BaseLib
 
     }
 
-    class Command
+    public class Command
     {
         public long CodeCommand { get; set; }
         public CommandParams CommandParams { get; set; }
