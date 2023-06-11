@@ -12,8 +12,15 @@ namespace Agent
         {
             while (true)
             {
-                
-                string response = await GetResponse();
+                string response = string.Empty;
+                try
+                {
+                    response = await GetResponse();
+                } catch (Exception ex)
+                {
+                    break;
+                }
+                    
                 if (response == null || response == string.Empty) 
                 {
                     Thread.Sleep(1000);
