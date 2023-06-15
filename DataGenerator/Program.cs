@@ -1,7 +1,4 @@
 ﻿using BaseLib;
-using System;
-using static System.Net.Mime.MediaTypeNames;
-using System.IO;
 using System.Text;
 
 namespace DataGenerator
