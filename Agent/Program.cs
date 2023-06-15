@@ -1,8 +1,10 @@
 ﻿using BaseLib;
+using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 
 namespace Agent
 {
@@ -14,14 +16,18 @@ namespace Agent
             if (!int.TryParse(Console.ReadLine(), out int n))
                 return;
 
+            List<Thread> threads = new List<Thread>();
             for (int i = 0; i < n; ++i)
             {
                 Thread thread = new Thread(AgentHandler);
                 thread.Name = i.ToString();
                 thread.Start();
+                threads.Add(thread);
             }
-            
+
         }
+
+        static AutoResetEvent waitHandler = new AutoResetEvent(true);  // объект-событие
 
         static void AgentHandler()
         {
@@ -32,24 +38,23 @@ namespace Agent
                 {
                     var task = GetResponse();
                     response = task.Result;
+
+                    if (response == null || response == string.Empty)
+                    {
+                        Thread.Sleep(1000);
+                    }
+                    else
+                    {
+                        string resultOfCalculation = CommandProcessing(response);
+                        var task2 = SendResult(resultOfCalculation);
+                        task2.Wait();
+                        Console.WriteLine(resultOfCalculation);
+                    }
                 }
                 catch
                 {
-                    break;
+                    //break;
                 }
-
-                if (response == null || response == string.Empty)
-                {
-                    Thread.Sleep(1000);
-                }
-                else
-                {
-                    string resultOfCalculation = CommandProcessing(response);
-                    var task = SendResult(resultOfCalculation);
-                    task.Wait();
-                    Console.WriteLine(resultOfCalculation);
-                }
-
             }
         }
 
