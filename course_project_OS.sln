@@ -12,6 +12,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agent", "Agent\Agent.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseLib", "BaseLib\BaseLib.csproj", "{374AF515-A836-4465-90D8-17461FF041DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataGenerator", "DataGenerator\DataGenerator.csproj", "{F59CD09F-53D4-41E7-B1CB-E9FC4B303BFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{374AF515-A836-4465-90D8-17461FF041DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{374AF515-A836-4465-90D8-17461FF041DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{374AF515-A836-4465-90D8-17461FF041DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F59CD09F-53D4-41E7-B1CB-E9FC4B303BFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F59CD09F-53D4-41E7-B1CB-E9FC4B303BFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F59CD09F-53D4-41E7-B1CB-E9FC4B303BFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F59CD09F-53D4-41E7-B1CB-E9FC4B303BFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
