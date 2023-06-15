@@ -1,4 +1,6 @@
-﻿namespace course_project_OS
+﻿using System.Diagnostics;
+
+namespace course_project_OS
 {
     internal class Program
     {
@@ -10,6 +12,9 @@
                                    + "exit - для выхода из программы\n";
         static void Main(string[] args)
         {
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+
             Console.WriteLine(welcome);
 
             Thread senderCommand = new Thread(SenderCommand.Run);
@@ -25,7 +30,14 @@
                 ProcessingCommand(command);
             }
 
+            while (!TaskCounter.Empty())
+                Thread.Sleep(1000);
+
             SenderCommand.OffApp();
+
+            stopWatch.Stop();
+
+            Console.WriteLine(stopWatch.Elapsed.TotalSeconds);
         }
 
         static void ProcessingCommand(string command)

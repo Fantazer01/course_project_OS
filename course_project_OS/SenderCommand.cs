@@ -24,7 +24,7 @@ namespace course_project_OS
         {
             tcpListener.Start();
             
-            while (runApplication)
+            while (runApplication || !TaskCounter.Empty())
             {
                 if (tcpListener.Pending())
                     AnswerToRequest().Wait();
@@ -67,10 +67,12 @@ namespace course_project_OS
                     var requestData = Encoding.UTF8.GetBytes(command.ToString());
                     // отправляем данные агенту
                     await stream.WriteAsync(requestData);
+                    TaskCounter.Increase();
                     NoticeRepository.Add(new Notice(command.CodeCommand, "Command accepted for processing"));
                 }
             } else if (cmd[0] == "result")
             {
+                TaskCounter.Decrease();
                 if (cmd[1] == "error")
                     NoticeRepository.Add(new Notice(-1, cmd[2]));
                 else

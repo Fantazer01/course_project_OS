@@ -26,6 +26,14 @@ namespace course_project_OS
             return counter;
         }
 
+        public static bool Empty()
+        {
+            lock (locker)
+            {
+                return Instance.Commands.Count == 0;
+            }
+        }
+
         public static bool TryPop(out Command? command)
         {
             bool result;
